@@ -7,10 +7,10 @@ def checksum():
         global_counts = {2: 0, 3: 0}
         for line in f:
             occurrences = {2: False, 3: False}
-            for letter_occurrence in Counter(line).values():
-                if letter_occurrence == 2:
+            for letter_occurrences in Counter(line).values():
+                if letter_occurrences == 2:
                     occurrences[2] = True
-                elif letter_occurrence == 3:
+                elif letter_occurrences == 3:
                     occurrences[3] = True
 
                 # Optimisation
