@@ -7,7 +7,7 @@ def all_cells(starting_cell_x, starting_cell_y, x_size, y_size):
 
 def get_count_overlapping_cells():
     with open('input') as f:
-        claimed_cell = {}
+        claimed_cells = {}
 
         for line in f:
             claim = line.replace(':', '').split(' ')
@@ -16,12 +16,12 @@ def get_count_overlapping_cells():
             (x_size, y_size) = map(int, claim[3].split('x'))
 
             for cell in all_cells(starting_cell_x, starting_cell_y, x_size, y_size):
-                if cell in claimed_cell:
-                    claimed_cell[cell] += 1
+                if cell in claimed_cells:
+                    claimed_cells[cell] += 1
                 else:
-                    claimed_cell[cell] = 1
+                    claimed_cells[cell] = 1
 
-    overlapping_set = {cell for cell, count in claimed_cell.items() if count > 1}
+    overlapping_set = {cell for cell, count in claimed_cells.items() if count > 1}
     return len(overlapping_set)
 
 
