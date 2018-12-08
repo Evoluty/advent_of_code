@@ -5,7 +5,7 @@ def get_polymer():
 
 
 # @todo: need improvement
-def get_reacted_polymer(chain):
+def react_polymer(chain):
     change_happens = True
     while change_happens:
         change_happens = False
@@ -18,7 +18,7 @@ def get_reacted_polymer(chain):
 
 
 line = get_polymer()
-final_polymer = get_reacted_polymer(line)
+final_polymer = react_polymer(line)
 
 print(final_polymer)
 print(len(final_polymer))
