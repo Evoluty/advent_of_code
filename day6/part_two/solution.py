@@ -1,7 +1,4 @@
-# Should return 4233
-from collections import Counter
-
-
+# Should return 45290
 def load_data():
     data = []
     with open('input') as f:
@@ -71,38 +68,21 @@ def fill_board(board, all_points):
     return board
 
 
-def get_borders_values(b):
-    for j in range(len(b)):
-        for i in range(len(b[0])):
-            if j == 0 or j == len(b) - 1:
-                yield (j, i)
-            elif i == 0 or i == len(b[0]) - 1:
-                yield (j, i)
-
-
-def get_non_infinite_coordinates(board):
-    borders_values = set()
-    for t in get_borders_values(board):
-        value = board[t[0]][t[1]]
-        if value != '.':
-            borders_values.add(value)
-    return borders_values
-
-
-def find_greatest_coordinate_size(board, not_infinite_points):
-    cnt = Counter()
-    for line in board:
-        for cell in line:
-            if cell not in not_infinite_points:
-                cnt[cell] += 1
-
-    return cnt.most_common(1)[0][1]
+def get_closest_area_size(max_distance, board, all_points):
+    area = 0
+    for j, line in enumerate(board):
+        for i, cell in enumerate(line):
+            distance = 0
+            for point in all_points:
+                distance += get_manhattan_distance((i, j), point)
+            if distance < max_distance:
+                area += 1
+    return area
 
 
 points = load_data()
 board = build_board(points)
 board = fill_board(board, points)
-non_infinite_coordinates = get_non_infinite_coordinates(board)
-greatest_coordinate = find_greatest_coordinate_size(board, non_infinite_coordinates)
+area_size = get_closest_area_size(10000, board, points)
 
-print(greatest_coordinate)
+print(area_size)
