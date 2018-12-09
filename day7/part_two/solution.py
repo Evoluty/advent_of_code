@@ -1,4 +1,4 @@
-# should return
+# should return 1024
 def load_data(file_name):
     with open(file_name) as f:
         all_steps = set()
